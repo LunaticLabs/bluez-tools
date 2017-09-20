@@ -108,6 +108,11 @@ static uuid_name_lookup_table_t uuid_name_lookup_table[] = {
     // Custom:
     {"0000112F-0000-1000-8000-00805F9B34FB", "PhoneBookAccess", NULL},
     {"831C4071-7BC8-4A9C-A01C-15DF25A4ADBC", "ActiveSync", NULL},
+    {"0000180D-0000-1000-8000-00805F9B34FB", "HeartRate", NULL},
+    {"0000180F-0000-1000-8000-00805F9B34FB", "BatteryService", NULL},
+    {"0000180A-0000-1000-8000-00805F9B34FB", "DeviceInformation", NULL},
+    {"00001800-0000-1000-8000-00805F9B34FB", "GenericAccess", NULL},
+    {"00001801-0000-1000-8000-00805F9B34FB", "GenericAttribute", NULL},
 };
 
 #define UUID_NAME_LOOKUP_TABLE_SIZE \

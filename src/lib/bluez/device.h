@@ -101,6 +101,8 @@ gint16 device_get_rssi(Device *self, GError **error);
 gboolean device_get_trusted(Device *self, GError **error);
 void device_set_trusted(Device *self, const gboolean value, GError **error);
 const gchar **device_get_uuids(Device *self, GError **error);
+const gchar **device_get_gatt_services(Device *self, GError **error);
+const GVariant *device_get_all_properties(Device *self, GError **error);
 
 #ifdef	__cplusplus
 }

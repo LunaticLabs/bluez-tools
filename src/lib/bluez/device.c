@@ -449,3 +449,27 @@ const gchar **device_get_uuids(Device *self, GError **error)
 	return ret;
 }
 
+const gchar **device_get_gatt_services(Device *self, GError **error)
+{
+	g_assert(DEVICE_IS(self));
+	g_assert(self->priv->properties != NULL);
+	GVariant *prop = properties_get(self->priv->properties, DEVICE_DBUS_INTERFACE, "GattServices", error);
+	if(prop == NULL)
+		return NULL;
+	const gchar **ret = g_variant_get_strv(prop, NULL);
+	g_variant_unref(prop);
+	return ret;
+}
+
+const GVariant *device_get_all_properties(Device *self, GError **error)
+{
+	g_assert(DEVICE_IS(self));
+	g_assert(self->priv->properties != NULL);
+	GVariant *prop = properties_get_all(self->priv->properties, DEVICE_DBUS_INTERFACE, error);
+	if(prop == NULL)
+		return NULL;
+    //g_errg_variant_get_type_string(prop);
+	//const gchar **ret = g_variant_get_strv(prop, NULL);
+	//g_variant_unref(prop);
+	return prop;
+}

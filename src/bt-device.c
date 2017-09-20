@@ -611,21 +611,98 @@ int main(int argc, char *argv[])
         }
 
         g_print("[%s]\n", device_get_address(device, &error));
+        if (error)
+        {
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
         g_print("  Name: %s\n", device_get_name(device, &error));
+        if (error)
+        {
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
         g_print("  Alias: %s [rw]\n", device_get_alias(device, &error));
+        if (error)
+        {
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
         g_print("  Address: %s\n", device_get_address(device, &error));
+        if (error)
+        {
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
         g_print("  Icon: %s\n", device_get_icon(device, &error));
+        if (error)
+        {
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
         g_print("  Class: 0x%x\n", device_get_class(device, &error));
+        if (error)
+        {
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
         g_print("  Paired: %d\n", device_get_paired(device, &error));
+        if (error)
+        {
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
         g_print("  Trusted: %d [rw]\n", device_get_trusted(device, &error));
+        if (error)
+        {
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
         g_print("  Blocked: %d [rw]\n", device_get_blocked(device, &error));
+        if (error)
+        {
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
         g_print("  Connected: %d\n", device_get_connected(device, &error));
+        if (error)
+        {
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
         g_print("  UUIDs: [");
         const gchar **uuids = device_get_uuids(device, &error);
-        for (int j = 0; uuids[j] != NULL; j++)
+        if (error)
         {
-            if (j > 0) g_print(", ");
-            g_print("%s", uuid2name(uuids[j]));
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
+        else
+        {
+            for (int j = 0; uuids[j] != NULL; j++)
+            {
+                if (j > 0) g_print(", ");
+                g_print("%s", uuid2name(uuids[j]));
+            }
+        }
+        g_print("]\n");
+        
+        g_print("  All Properties: [");
+        const GVariant *properties = device_get_all_properties(device, &error);
+        if (error)
+        {
+            g_print("Error: %s\n", error->message);
+            error = NULL;
+        }
+        else
+        {
+            for (int i = 0; i < g_variant_n_children(properties); i++)
+            {
+                if (i > 0) g_print(", ");
+                GVariant *tmp = g_variant_get_child_value(properties, i);
+                GVariant *name = g_variant_get_child_value(tmp, 0);
+                g_print("%s", g_variant_get_string(name, NULL));
+            }
         }
         g_print("]\n");
 
